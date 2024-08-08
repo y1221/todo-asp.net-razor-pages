@@ -1,4 +1,5 @@
 .vs
 TodoRazorApp/bin
 TodoRazorApp/obj
-TodoRazorApp/TodoRazorApp.csproj.user
+TodoRazorApp/*.user
+TodoRazorApp/Properties/*.user
