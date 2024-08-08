@@ -21,7 +21,7 @@ namespace TodoRazorApp.Pages.Accounts
 
         public IList<Account> Account { get;set; } = default!;
 
-        public async System.Threading.Tasks.Task OnGetAsync()
+        public async Task OnGetAsync()
         {
             Account = await _context.Account.ToListAsync();
         }
