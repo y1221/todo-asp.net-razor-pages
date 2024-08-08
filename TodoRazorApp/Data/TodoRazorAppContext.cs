@@ -15,5 +15,6 @@ namespace TodoRazorApp.Data
         }
 
         public DbSet<TodoRazorApp.Models.Account> Account { get; set; } = default!;
+        public DbSet<TodoRazorApp.Models.Todo> Todo { get; set; } = default!;
     }
 }
