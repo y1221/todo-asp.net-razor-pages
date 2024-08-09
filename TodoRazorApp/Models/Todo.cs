@@ -10,11 +10,13 @@ namespace TodoRazorApp.Models
 
         public int CategoryId { get; set; }
 
+        [DataType(DataType.Text)]
         public string? Name { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime DueDate { get; set; }
 
+        [DataType(DataType.Text)]
         public string? Memo { get; set; }
 
         public string? IsDone { get; set; }
