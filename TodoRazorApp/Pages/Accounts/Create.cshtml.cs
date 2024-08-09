@@ -41,7 +41,8 @@ namespace TodoRazorApp.Pages.Accounts
             // 未入力チェック
             if (string.IsNullOrEmpty(Account.Name)
                 || string.IsNullOrEmpty(Account.Mail)
-                || string.IsNullOrEmpty(Account.Password))
+                || string.IsNullOrEmpty(Account.Password)
+                || string.IsNullOrEmpty(Request.Form["PassConfirm"]))
             {
                 ErrorMsg = "未入力項目があります";
                 return Page();
@@ -52,6 +53,13 @@ namespace TodoRazorApp.Pages.Accounts
             if (account != null)
             {
                 ErrorMsg = "既に登録されたメールアドレスです";
+                return Page();
+            }
+
+            // パスワード（確認）が一致しているかチェック
+            if (Account.Password != Request.Form["PassConfirm"])
+            {
+                ErrorMsg = "パスワードが一致しません";
                 return Page();
             }
 
