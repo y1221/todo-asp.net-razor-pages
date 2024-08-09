@@ -12,9 +12,9 @@ namespace TodoRazorApp.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            return Redirect("https://localhost:7147/Accounts");
         }
     }
 }
