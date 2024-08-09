@@ -14,7 +14,7 @@ namespace TodoRazorApp.Pages
 
         public IActionResult OnGet()
         {
-            return Redirect("https://localhost:7147/Accounts");
+            return RedirectToPage("./Accounts/Index");
         }
     }
 }
