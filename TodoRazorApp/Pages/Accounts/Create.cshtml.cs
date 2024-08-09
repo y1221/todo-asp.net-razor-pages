@@ -20,9 +20,10 @@ namespace TodoRazorApp.Pages.Accounts
             _context = context;
         }
 
+        public string ErrorMsg { get; set; } = string.Empty;
+
         public IActionResult OnGet()
         {
-            ViewData["ErrorMsg"] = string.Empty;
             return Page();
         }
 
@@ -42,7 +43,7 @@ namespace TodoRazorApp.Pages.Accounts
                 || string.IsNullOrEmpty(Account.Mail)
                 || string.IsNullOrEmpty(Account.Password))
             {
-                ViewData["ErrorMsg"] = "未入力項目があります";
+                ErrorMsg = "未入力項目があります";
                 return Page();
             }
 
@@ -50,7 +51,7 @@ namespace TodoRazorApp.Pages.Accounts
             var account = await _context.Account.FirstOrDefaultAsync(m => m.Mail == Account.Mail);
             if (account != null)
             {
-                ViewData["ErrorMsg"] = "既に登録されたメールアドレスです";
+                ErrorMsg = "既に登録されたメールアドレスです";
                 return Page();
             }
 
