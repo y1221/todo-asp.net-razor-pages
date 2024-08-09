@@ -19,11 +19,39 @@ namespace TodoRazorApp.Pages.Accounts
             _context = context;
         }
 
-        public IList<Account> Account { get;set; } = default!;
-
-        public async Task OnGetAsync()
+        public IActionResult OnGet()
         {
-            Account = await _context.Account.ToListAsync();
+            ViewData["ErrorMsg"] = string.Empty;
+            return Page();
+        }
+
+        [BindProperty]
+        public Account Account { get; set; } = default!;
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            // 未入力チェック
+            if (string.IsNullOrEmpty(Account.Mail)
+                || string.IsNullOrEmpty(Account.Password))
+            {
+                ViewData["ErrorMsg"] = "未入力項目があります";
+                return Page();
+            }
+
+            // ログインチェック
+            var account = await _context.Account.FirstOrDefaultAsync(m => m.Mail == Account.Mail && m.Password == Account.Password);
+            if (account == null)
+            {
+                ViewData["ErrorMsg"] = "メールアドレスまたはパスワードが誤っています";
+                return Page();
+            }
+
+            return RedirectToPage("../Todos/Index");
         }
     }
 }
