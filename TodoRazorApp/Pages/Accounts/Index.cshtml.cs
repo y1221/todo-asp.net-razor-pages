@@ -53,6 +53,10 @@ namespace TodoRazorApp.Pages.Accounts
                 return Page();
             }
 
+            // ●セッションも利用してみる
+            HttpContext.Session.SetString("testSession", "abcde");
+            HttpContext.Session.SetInt32("accountId", account.Id);
+
             return RedirectToPage("../Todos/Index", new { accountId = account.Id });
         }
     }

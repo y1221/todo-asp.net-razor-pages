@@ -23,6 +23,9 @@ namespace TodoRazorApp.Pages.Todos
 
         public async Task OnGetAsync(int accountId)
         {
+            var testString = HttpContext.Session.GetString("testSession");
+            var testaccountId = HttpContext.Session.GetInt32("accountId");
+
             Todo = await _context.Todo.ToListAsync();
         }
     }
