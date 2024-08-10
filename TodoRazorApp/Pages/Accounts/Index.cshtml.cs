@@ -53,7 +53,7 @@ namespace TodoRazorApp.Pages.Accounts
                 return Page();
             }
 
-            return RedirectToPage("../Todos/Index");
+            return RedirectToPage("../Todos/Index", new { accountId = account.Id });
         }
     }
 }

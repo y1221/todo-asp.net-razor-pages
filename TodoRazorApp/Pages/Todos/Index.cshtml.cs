@@ -21,7 +21,7 @@ namespace TodoRazorApp.Pages.Todos
 
         public IList<Todo> Todo { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int accountId)
         {
             Todo = await _context.Todo.ToListAsync();
         }
