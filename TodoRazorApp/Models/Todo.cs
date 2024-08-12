@@ -10,7 +10,7 @@ namespace TodoRazorApp.Models
 
         public int CategoryId { get; set; }
 
-        [Display(Name = "タスク名")]
+        [Display(Name = "タスク")]
         [DataType(DataType.Text)]
         [StringLength(30)]
         [Required]
@@ -20,7 +20,7 @@ namespace TodoRazorApp.Models
         [DataType(DataType.Date)]
         public DateTime DueDate { get; set; }
 
-        [Display(Name = "メモ")]
+        [Display(Name = "備考")]
         [DataType(DataType.Text)]
         [StringLength(100)]
         public string? Memo { get; set; }

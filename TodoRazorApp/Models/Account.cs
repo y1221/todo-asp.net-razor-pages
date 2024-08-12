@@ -6,7 +6,7 @@ namespace TodoRazorApp.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "名前")]
+        [Display(Name = "ユーザ名")]
         [DataType(DataType.Text)]
         [StringLength(30)]
         public string Name { get; set; } = string.Empty;
