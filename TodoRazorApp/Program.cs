@@ -10,12 +10,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<TodoRazorAppContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TodoRazorAppContext") ?? throw new InvalidOperationException("Connection string 'TodoRazorAppContext' not found.")));
 builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromSeconds(10);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
-});
+builder.Services.AddSession();
 
 var app = builder.Build();
 
