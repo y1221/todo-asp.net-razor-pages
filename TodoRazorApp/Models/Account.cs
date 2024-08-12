@@ -6,14 +6,24 @@ namespace TodoRazorApp.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "名前")]
         [DataType(DataType.Text)]
-        public string? Name { get; set; }
+        [StringLength(30)]
+        [Required]
+        public string Name { get; set; } = string.Empty;
 
+        [Display(Name = "メールアドレス")]
         [DataType(DataType.EmailAddress)]
-        public string? Mail { get; set; }
+        [StringLength(30)]
+        [Required]
+        public string Mail { get; set; } = string.Empty;
 
+        [Display(Name = "パスワード")]
         [DataType(DataType.Password)]
-        public string? Password { get; set; }
+        [RegularExpression(@"^[a-zA-Z0-9 -/:-@[-`{-~]*$")]
+        [StringLength(30, MinimumLength = 8)]
+        [Required]
+        public string Password { get; set; } = string.Empty;
 
         public bool IsDelete { get; set; }
     }

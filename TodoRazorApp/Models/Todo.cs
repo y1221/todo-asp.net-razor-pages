@@ -10,17 +10,23 @@ namespace TodoRazorApp.Models
 
         public int CategoryId { get; set; }
 
+        [Display(Name = "タスク名")]
         [DataType(DataType.Text)]
-        public string? Name { get; set; }
+        [StringLength(30)]
+        [Required]
+        public string Name { get; set; } = string.Empty;
 
+        [Display(Name = "締め切り")]
         [DataType(DataType.Date)]
         public DateTime DueDate { get; set; }
 
+        [Display(Name = "メモ")]
         [DataType(DataType.Text)]
+        [StringLength(100)]
         public string? Memo { get; set; }
 
-        public string? IsDone { get; set; }
+        public bool IsDone { get; set; }
 
-        public string? IsDelete { get; set; }
+        public bool IsDelete { get; set; }
     }
 }
