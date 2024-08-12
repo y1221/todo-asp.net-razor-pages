@@ -14,12 +14,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Todo[0].AccountId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Todo[0].CategoryId)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Todo[0].Name)
             </th>
             <th>
@@ -28,24 +22,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Todo[0].Memo)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Todo[0].IsDone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Todo[0].IsDelete)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.Todo) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccountId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryId)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -54,12 +36,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Memo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDelete)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
