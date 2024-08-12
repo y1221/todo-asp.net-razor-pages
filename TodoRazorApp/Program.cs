@@ -24,6 +24,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
 
     AccountSeed.Initialize(services);
+    TodoSeed.Initialize(services);
 }
 
 // Configure the HTTP request pipeline.
