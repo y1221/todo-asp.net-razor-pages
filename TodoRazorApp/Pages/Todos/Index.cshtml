@@ -40,7 +40,7 @@
                     @Html.DisplayFor(modelItem => item.DueDate)
                 </td>
                 <td>
-                    <a asp-route-id="@item.Id">完了</a> |
+                    <a asp-page-handler="Done" asp-route-id="@item.Id">完了</a> |
                     <a asp-route-id="@item.Id">削除</a>
                 </td>
             </tr>

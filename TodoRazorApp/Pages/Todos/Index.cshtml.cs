@@ -28,5 +28,41 @@ namespace TodoRazorApp.Pages.Todos
             Todo = await _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == false).ToListAsync();
             DoneTodo = await _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == true).ToListAsync();
         }
+
+        public async Task<IActionResult> OnGetDone(int id)
+        {
+            var todo = await _context.Todo.FirstOrDefaultAsync(m => m.Id == id);
+            if (todo == null)
+            {
+                return NotFound();
+            }
+
+            // 完了状態に更新
+            todo.IsDone = true;
+            _context.Attach(todo).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TodoExists(todo.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToPage("./Index");
+        }
+
+        private bool TodoExists(int id)
+        {
+            return _context.Todo.Any(e => e.Id == id);
+        }
     }
 }
