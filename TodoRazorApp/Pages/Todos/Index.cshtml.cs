@@ -31,6 +31,16 @@ namespace TodoRazorApp.Pages.Todos
 
         public async Task<IActionResult> OnGetDone(int id)
         {
+            return await ChangeIsDone(id, true);
+        }
+
+        public async Task<IActionResult> OnGetReturn(int id)
+        {
+            return await ChangeIsDone(id, false);
+        }
+
+        private async Task<IActionResult> ChangeIsDone(int id, bool isDone)
+        {
             var todo = await _context.Todo.FirstOrDefaultAsync(m => m.Id == id);
             if (todo == null)
             {
@@ -38,7 +48,7 @@ namespace TodoRazorApp.Pages.Todos
             }
 
             // 完了状態に更新
-            todo.IsDone = true;
+            todo.IsDone = isDone;
             _context.Attach(todo).State = EntityState.Modified;
 
             try

@@ -73,7 +73,7 @@
                     @Html.DisplayFor(modelItem => item.DueDate)
                 </td>
                 <td>
-                    <a asp-route-id="@item.Id">戻す</a> |
+                    <a asp-page-handler="Return" asp-route-id="@item.Id">戻す</a> |
                     <a asp-route-id="@item.Id">削除</a>
                 </td>
             </tr>
