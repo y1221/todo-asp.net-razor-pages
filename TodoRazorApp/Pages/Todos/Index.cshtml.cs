@@ -22,11 +22,25 @@ namespace TodoRazorApp.Pages.Todos
         public IList<Todo> Todo { get;set; } = default!;
         public IList<Todo> DoneTodo { get;set; } = default!;
 
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
+
         public async Task OnGetAsync()
         {
             var accountId = HttpContext.Session.GetInt32("accountId");
-            Todo = await _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == false && todo.IsDelete == false).ToListAsync();
-            DoneTodo = await _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == true && todo.IsDelete == false).ToListAsync();
+
+            var todos = _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == false && todo.IsDelete == false);
+            var doneTodos = _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == true && todo.IsDelete == false);
+            
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                // 検索文字列で絞り込む
+                todos = todos.Where(todo => todo.Name.Contains(SearchString));
+                doneTodos = doneTodos.Where(doneTodo => doneTodo.Name.Contains(SearchString));
+            }
+
+            Todo = await todos.ToListAsync();
+            DoneTodo = await doneTodos.ToListAsync();
         }
 
         public async Task<IActionResult> OnGetDone(int id)
