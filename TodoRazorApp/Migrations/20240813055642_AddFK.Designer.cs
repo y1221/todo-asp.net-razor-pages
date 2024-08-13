@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TodoRazorApp.Data;
 
@@ -11,9 +12,11 @@ using TodoRazorApp.Data;
 namespace TodoRazorApp.Migrations
 {
     [DbContext(typeof(TodoRazorAppContext))]
-    partial class TodoRazorAppContextModelSnapshot : ModelSnapshot
+    [Migration("20240813055642_AddFK")]
+    partial class AddFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
