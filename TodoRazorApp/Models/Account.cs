@@ -25,5 +25,7 @@ namespace TodoRazorApp.Models
         public string Password { get; set; } = string.Empty;
 
         public bool IsDelete { get; set; }
+
+        public ICollection<Todo> Todos { get; } = new List<Todo>();
     }
 }

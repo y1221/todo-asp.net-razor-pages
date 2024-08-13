@@ -8,8 +8,6 @@ namespace TodoRazorApp.Models
 
         public int AccountId { get; set; }
 
-        public int CategoryId { get; set; }
-
         [Display(Name = "タスク")]
         [DataType(DataType.Text)]
         [StringLength(30)]
@@ -28,5 +26,7 @@ namespace TodoRazorApp.Models
         public bool IsDone { get; set; }
 
         public bool IsDelete { get; set; }
+
+        public Account Account { get; set; } = null!;
     }
 }
