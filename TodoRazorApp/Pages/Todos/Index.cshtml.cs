@@ -20,11 +20,13 @@ namespace TodoRazorApp.Pages.Todos
         }
 
         public IList<Todo> Todo { get;set; } = default!;
+        public IList<Todo> DoneTodo { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
             var accountId = HttpContext.Session.GetInt32("accountId");
-            Todo = await _context.Todo.Where(todo => todo.AccountId == accountId).ToListAsync();
+            Todo = await _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == false).ToListAsync();
+            DoneTodo = await _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == true).ToListAsync();
         }
     }
 }
