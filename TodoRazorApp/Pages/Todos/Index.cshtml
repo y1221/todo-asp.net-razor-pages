@@ -41,7 +41,7 @@
                 </td>
                 <td>
                     <a asp-page-handler="Done" asp-route-id="@item.Id">完了</a> |
-                    <a asp-route-id="@item.Id">削除</a>
+                    <a asp-page-handler="Delete" asp-route-id="@item.Id">削除</a>
                 </td>
             </tr>
         }
@@ -74,7 +74,7 @@
                 </td>
                 <td>
                     <a asp-page-handler="Return" asp-route-id="@item.Id">戻す</a> |
-                    <a asp-route-id="@item.Id">削除</a>
+                    <a asp-page-handler="Delete" asp-route-id="@item.Id">削除</a>
                 </td>
             </tr>
         }

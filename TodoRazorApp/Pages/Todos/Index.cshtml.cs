@@ -25,8 +25,8 @@ namespace TodoRazorApp.Pages.Todos
         public async Task OnGetAsync()
         {
             var accountId = HttpContext.Session.GetInt32("accountId");
-            Todo = await _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == false).ToListAsync();
-            DoneTodo = await _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == true).ToListAsync();
+            Todo = await _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == false && todo.IsDelete == false).ToListAsync();
+            DoneTodo = await _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == true && todo.IsDelete == false).ToListAsync();
         }
 
         public async Task<IActionResult> OnGetDone(int id)
@@ -49,6 +49,37 @@ namespace TodoRazorApp.Pages.Todos
 
             // 完了状態に更新
             todo.IsDone = isDone;
+            _context.Attach(todo).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TodoExists(todo.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToPage("./Index");
+        }
+
+        public async Task<IActionResult> OnGetDelete(int id)
+        {
+            var todo = await _context.Todo.FirstOrDefaultAsync(m => m.Id == id);
+            if (todo == null)
+            {
+                return NotFound();
+            }
+
+            // 削除状態に更新
+            todo.IsDelete = true;
             _context.Attach(todo).State = EntityState.Modified;
 
             try
