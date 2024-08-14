@@ -35,6 +35,14 @@ namespace TodoRazorApp.Pages.Todos
                 return Page();
             }
 
+            var accountId = HttpContext.Session.GetInt32("accountId");
+            if (accountId == null)
+            {
+                return Page();
+            }
+
+            Todo.AccountId = (int)accountId;
+
             _context.Todo.Add(Todo);
             await _context.SaveChangesAsync();
 
