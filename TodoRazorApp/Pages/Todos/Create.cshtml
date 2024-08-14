@@ -5,37 +5,36 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>タスク登録</h1>
+<div class="content-area">
+    <h1>タスク登録</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    <div class="main-container-border main-container-center">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group custom-form">
                 <label asp-for="Todo.Name" class="control-label"></label>
                 <input asp-for="Todo.Name" class="form-control" />
                 <span asp-validation-for="Todo.Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group custom-form">
                 <label asp-for="Todo.DueDate" class="control-label"></label>
                 <input asp-for="Todo.DueDate" class="form-control" />
                 <span asp-validation-for="Todo.DueDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group custom-form">
                 <label asp-for="Todo.Memo" class="control-label"></label>
                 <input asp-for="Todo.Memo" class="form-control" />
                 <span asp-validation-for="Todo.Memo" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group align-center">
                 <input type="submit" value="登録" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
 
-<div>
-    <a asp-page="Index">トップ画面に戻る</a>
+    <div class="align-center">
+        <a asp-page="Index">トップ画面に戻る</a>
+    </div>
 </div>
 
 @section Scripts {

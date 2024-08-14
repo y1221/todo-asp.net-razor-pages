@@ -21,7 +21,32 @@ body {
   margin-bottom: 60px;
 }
 
-.err-msg{
+.content-area {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.main-container-border {
+    margin: 0 0 20px 0;
+    padding: 20px 40px;
+    border: 1px solid;
+}
+
+.main-container-center {
+    display: flex;
+    justify-content: center;
+}
+
+.err-msg {
   color: red;
   font-weight: bold;
+}
+
+.custom-form {
+    width: 350px;
+    margin: 0 0 10px 0;
+}
+
+.align-center {
+    text-align: center;
 }

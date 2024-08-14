@@ -5,32 +5,35 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>会員登録</h1>
+<div class="content-area">
+    <h1>会員登録</h1>
 
-<p class="err-msg">@Model.ErrorMsg</p>
+    <div class="main-container-border main-container-center">
+        <p class="err-msg">@Model.ErrorMsg</p>
 
-<form method="post">
-    <div class="form-group">
-        <label asp-for="Account.Name" class="control-label"></label>
-        <input asp-for="Account.Name" class="form-control" />
+        <form method="post">
+            <div class="form-group custom-form">
+                <label asp-for="Account.Name" class="control-label"></label>
+                <input asp-for="Account.Name" class="form-control" />
+            </div>
+            <div class="form-group custom-form">
+                <label asp-for="Account.Mail" class="control-label"></label>
+                <input asp-for="Account.Mail" class="form-control" />
+            </div>
+            <div class="form-group custom-form">
+                <label asp-for="Account.Password" class="control-label"></label>
+                <input asp-for="Account.Password" class="form-control" />
+            </div>
+            <div class="form-group custom-form">
+                <label for="PassConfirm" class="control-label">パスワード（確認）</label>
+                <input type="password" id="PassConfirm" name="PassConfirm" class="form-control" />
+            </div>
+            <div class="form-group align-center">
+                <input type="submit" value="登録" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label asp-for="Account.Mail" class="control-label"></label>
-        <input asp-for="Account.Mail" class="form-control" />
+    <div class="align-center">
+        <a asp-page="Index">ログインはこちら</a>
     </div>
-    <div class="form-group">
-        <label asp-for="Account.Password" class="control-label"></label>
-        <input asp-for="Account.Password" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label for="PassConfirm" class="control-label">パスワード（確認）</label>
-        <input type="password" id="PassConfirm" name="PassConfirm" class="form-control" />
-    </div>
-    <div class="form-group">
-        <input type="submit" value="登録" class="btn btn-primary" />
-    </div>
-</form>
-
-<div>
-    <a asp-page="Index">ログインはこちら</a>
 </div>
