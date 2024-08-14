@@ -5,10 +5,9 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>タスク詳細</h1>
 
 <div>
-    <h4>Todo</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -32,6 +31,10 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Todo.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Edit" asp-route-id="@Model.Todo.Id">
+          <input type="submit" value="編集"/>
+    </a>
+</div>
+<div>
+    <a asp-page="./Index">トップ画面に戻る</a>
 </div>
