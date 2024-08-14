@@ -26,7 +26,5 @@ namespace TodoRazorApp.Models
         public bool IsDone { get; set; }
 
         public bool IsDelete { get; set; }
-
-        public Account Account { get; set; } = null!;
     }
 }
