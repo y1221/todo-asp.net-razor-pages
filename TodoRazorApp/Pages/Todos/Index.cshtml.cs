@@ -20,11 +20,104 @@ namespace TodoRazorApp.Pages.Todos
         }
 
         public IList<Todo> Todo { get;set; } = default!;
+        public IList<Todo> DoneTodo { get;set; } = default!;
+
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
 
         public async Task OnGetAsync()
         {
             var accountId = HttpContext.Session.GetInt32("accountId");
-            Todo = await _context.Todo.Where(todo => todo.AccountId == accountId).ToListAsync();
+
+            var todos = _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == false && todo.IsDelete == false);
+            var doneTodos = _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == true && todo.IsDelete == false);
+            
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                // 検索文字列で絞り込む
+                todos = todos.Where(todo => todo.Name.Contains(SearchString));
+                doneTodos = doneTodos.Where(doneTodo => doneTodo.Name.Contains(SearchString));
+            }
+
+            Todo = await todos.ToListAsync();
+            DoneTodo = await doneTodos.ToListAsync();
+        }
+
+        public async Task<IActionResult> OnGetDone(int id)
+        {
+            return await ChangeIsDone(id, true);
+        }
+
+        public async Task<IActionResult> OnGetReturn(int id)
+        {
+            return await ChangeIsDone(id, false);
+        }
+
+        private async Task<IActionResult> ChangeIsDone(int id, bool isDone)
+        {
+            var todo = await _context.Todo.FirstOrDefaultAsync(m => m.Id == id);
+            if (todo == null)
+            {
+                return NotFound();
+            }
+
+            // 完了状態に更新
+            todo.IsDone = isDone;
+            _context.Attach(todo).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TodoExists(todo.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToPage("./Index");
+        }
+
+        public async Task<IActionResult> OnGetDelete(int id)
+        {
+            var todo = await _context.Todo.FirstOrDefaultAsync(m => m.Id == id);
+            if (todo == null)
+            {
+                return NotFound();
+            }
+
+            // 削除状態に更新
+            todo.IsDelete = true;
+            _context.Attach(todo).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TodoExists(todo.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToPage("./Index");
+        }
+
+        private bool TodoExists(int id)
+        {
+            return _context.Todo.Any(e => e.Id == id);
         }
     }
 }
