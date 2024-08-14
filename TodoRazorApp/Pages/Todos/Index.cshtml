@@ -5,11 +5,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<a asp-page="Create">
+    <p class="btn btn-primary">新規タスク</p>
+</a>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+<form method="get">
+    <p>
+        <input type="text" asp-for="SearchString" /><input type="submit" value="検索" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -19,30 +24,59 @@
             <th>
                 @Html.DisplayNameFor(model => model.Todo[0].DueDate)
             </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Todo)
+        {
+            <tr>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DueDate)
+                </td>
+                <td>
+                    <a asp-page-handler="Done" asp-route-id="@item.Id">完了</a> |
+                    <a asp-page-handler="Delete" asp-route-id="@item.Id">削除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Todo[0].Memo)
+                完了済みタスク
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoneTodo[0].DueDate)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Todo) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DueDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Memo)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.DoneTodo)
+        {
+            <tr>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DueDate)
+                </td>
+                <td>
+                    <a asp-page-handler="Return" asp-route-id="@item.Id">戻す</a> |
+                    <a asp-page-handler="Delete" asp-route-id="@item.Id">削除</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
