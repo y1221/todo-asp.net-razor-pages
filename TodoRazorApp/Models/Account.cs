@@ -8,20 +8,21 @@ namespace TodoRazorApp.Models
 
         [Display(Name = "ユーザ名")]
         [DataType(DataType.Text)]
-        [StringLength(30)]
+        [StringLength(30, ErrorMessage = "30文字以下で入力してください。")]
+        [Required(ErrorMessage = "必須項目です。")]
         public string Name { get; set; } = string.Empty;
 
         [Display(Name = "メールアドレス")]
         [DataType(DataType.EmailAddress)]
-        [StringLength(30)]
-        [Required]
+        [StringLength(30, ErrorMessage = "30文字以下で入力してください。")]
+        [Required(ErrorMessage = "必須項目です。")]
         public string Mail { get; set; } = string.Empty;
 
         [Display(Name = "パスワード")]
         [DataType(DataType.Password)]
-        [RegularExpression(@"^[a-zA-Z0-9 -/:-@[-`{-~]*$")]
-        [StringLength(30, MinimumLength = 8)]
-        [Required]
+        [RegularExpression(@"^[a-zA-Z0-9 -/:-@[-`{-~]*$", ErrorMessage = "英数字または記号で入力してください。")]
+        [StringLength(30, MinimumLength = 8, ErrorMessage = "8文字以上30文字以下で入力してください。")]
+        [Required(ErrorMessage = "必須項目です。")]
         public string Password { get; set; } = string.Empty;
 
         public bool IsDelete { get; set; }

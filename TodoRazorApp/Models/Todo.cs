@@ -10,8 +10,8 @@ namespace TodoRazorApp.Models
 
         [Display(Name = "タスク")]
         [DataType(DataType.Text)]
-        [StringLength(30)]
-        [Required]
+        [StringLength(30, ErrorMessage = "30文字以下で入力してください。")]
+        [Required(ErrorMessage = "必須項目です。")]
         public string Name { get; set; } = string.Empty;
 
         [Display(Name = "締め切り")]
@@ -20,7 +20,7 @@ namespace TodoRazorApp.Models
 
         [Display(Name = "備考")]
         [DataType(DataType.Text)]
-        [StringLength(100)]
+        [StringLength(100, ErrorMessage = "100文字以下で入力してください。")]
         public string? Memo { get; set; }
 
         public bool IsDone { get; set; }

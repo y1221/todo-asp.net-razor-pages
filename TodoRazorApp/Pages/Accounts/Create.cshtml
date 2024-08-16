@@ -9,20 +9,24 @@
     <h1>会員登録</h1>
 
     <div class="main-container-border main-container-center">
-        <p class="err-msg">@Model.ErrorMsg</p>
-
         <form method="post">
+            <span class="err-msg">@Model.ErrorMsg</span>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group custom-form">
                 <label asp-for="Account.Name" class="control-label"></label>
                 <input asp-for="Account.Name" class="form-control" />
+                <span asp-validation-for="Account.Name" class="text-danger"></span>
             </div>
             <div class="form-group custom-form">
                 <label asp-for="Account.Mail" class="control-label"></label>
                 <input asp-for="Account.Mail" class="form-control" />
+                <span asp-validation-for="Account.Mail" class="text-danger"></span>
             </div>
             <div class="form-group custom-form">
                 <label asp-for="Account.Password" class="control-label"></label>
                 <input asp-for="Account.Password" class="form-control" />
+                <span asp-validation-for="Account.Password" class="text-danger"></span>
             </div>
             <div class="form-group custom-form">
                 <label for="PassConfirm" class="control-label">パスワード（確認）</label>

@@ -38,16 +38,6 @@ namespace TodoRazorApp.Pages.Accounts
                 return Page();
             }
 
-            // 未入力チェック
-            if (string.IsNullOrEmpty(Account.Name)
-                || string.IsNullOrEmpty(Account.Mail)
-                || string.IsNullOrEmpty(Account.Password)
-                || string.IsNullOrEmpty(Request.Form["PassConfirm"]))
-            {
-                ErrorMsg = "未入力項目があります";
-                return Page();
-            }
-
             // 登録済みのメールアドレスかチェック
             var account = await _context.Account.FirstOrDefaultAsync(m => m.Mail == Account.Mail);
             if (account != null)
