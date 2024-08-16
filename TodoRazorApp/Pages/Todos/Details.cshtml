@@ -29,6 +29,12 @@
                 <dd class="col-sm-10">
                     @Html.DisplayFor(model => model.Todo.Memo)
                 </dd>
+                <dt class="col-sm-2">
+                    作成者
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Todo.Account.Name)
+                </dd>
             </dl>
         </div>
         <div class="align-center">

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TodoRazorApp.Models
 {
@@ -26,5 +27,8 @@ namespace TodoRazorApp.Models
         public bool IsDone { get; set; }
 
         public bool IsDelete { get; set; }
+
+        [ForeignKey("AccountId")]
+        public Account Account { get; set; } = null!;
     }
 }
