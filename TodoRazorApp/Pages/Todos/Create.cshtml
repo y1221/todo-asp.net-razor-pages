@@ -17,6 +17,12 @@
                 <span asp-validation-for="Todo.Name" class="text-danger"></span>
             </div>
             <div class="form-group custom-form">
+                <label asp-for="Todo.CategoryId" class="control-label"></label>
+                <select asp-for="Todo.CategoryId" class="form-control" asp-items="ViewBag.CategoryList">
+                    <option value="0">未選択</option>
+                </select>
+            </div>
+            <div class="form-group custom-form">
                 <label asp-for="Todo.DueDate" class="control-label"></label>
                 <input asp-for="Todo.DueDate" class="form-control" />
                 <span asp-validation-for="Todo.DueDate" class="text-danger"></span>

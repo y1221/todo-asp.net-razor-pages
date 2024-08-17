@@ -9,6 +9,7 @@ namespace TodoRazorApp.Models
 
         public int AccountId { get; set; }
 
+        [Display(Name = "カテゴリ")]
         public int? CategoryId { get; set; }
 
         [Display(Name = "タスク")]
