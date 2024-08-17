@@ -9,6 +9,8 @@ namespace TodoRazorApp.Models
 
         public int AccountId { get; set; }
 
+        public int? CategoryId { get; set; }
+
         [Display(Name = "タスク")]
         [DataType(DataType.Text)]
         [StringLength(30, ErrorMessage = "30文字以下で入力してください。")]
@@ -30,5 +32,8 @@ namespace TodoRazorApp.Models
 
         [ForeignKey("AccountId")]
         public Account Account { get; set; } = null!;
+
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; } = null!;
     }
 }
