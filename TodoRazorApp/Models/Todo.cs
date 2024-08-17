@@ -31,9 +31,9 @@ namespace TodoRazorApp.Models
         public bool IsDelete { get; set; }
 
         [ForeignKey("AccountId")]
-        public Account Account { get; set; } = null!;
+        public Account? Account { get; set; }
 
         [ForeignKey("CategoryId")]
-        public Category Category { get; set; } = null!;
+        public Category? Category { get; set; }
     }
 }
