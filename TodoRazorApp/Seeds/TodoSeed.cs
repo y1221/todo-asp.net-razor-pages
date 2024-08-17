@@ -19,6 +19,7 @@ namespace TodoRazorApp.Seeds
                     new Todo
                     {
                         AccountId = 1,
+                        CategoryId = 1,
                         Name = "英語宿題",
                         DueDate = DateTime.Now.AddDays(3),
                         Memo = "",
@@ -29,6 +30,7 @@ namespace TodoRazorApp.Seeds
                     new Todo
                     {
                         AccountId = 1,
+                        CategoryId = 2,
                         Name = "サッカースパイク手入れ",
                         DueDate = DateTime.Now.AddDays(7),
                         Memo = "",
@@ -39,6 +41,7 @@ namespace TodoRazorApp.Seeds
                     new Todo
                     {
                         AccountId = 1,
+                        CategoryId = 3,
                         Name = "料理",
                         DueDate = DateTime.Now.AddDays(1),
                         Memo = "",
@@ -49,6 +52,7 @@ namespace TodoRazorApp.Seeds
                     new Todo
                     {
                         AccountId = 2,
+                        CategoryId = 1,
                         Name = "数学宿題",
                         DueDate = DateTime.Now.AddDays(8),
                         Memo = "",
@@ -59,6 +63,7 @@ namespace TodoRazorApp.Seeds
                     new Todo
                     {
                         AccountId = 2,
+                        CategoryId = 2,
                         Name = "野球バット手入れ",
                         DueDate = DateTime.Now.AddDays(2),
                         Memo = "",
@@ -69,6 +74,7 @@ namespace TodoRazorApp.Seeds
                     new Todo
                     {
                         AccountId = 2,
+                        CategoryId = 3,
                         Name = "洗濯",
                         DueDate = DateTime.Now.AddDays(5),
                         Memo = "",
@@ -79,6 +85,7 @@ namespace TodoRazorApp.Seeds
                     new Todo
                     {
                         AccountId = 3,
+                        CategoryId = 1,
                         Name = "国語宿題",
                         DueDate = DateTime.Now.AddDays(4),
                         Memo = "",
@@ -89,6 +96,7 @@ namespace TodoRazorApp.Seeds
                     new Todo
                     {
                         AccountId = 3,
+                        CategoryId = 2,
                         Name = "テニスラケット手入れ",
                         DueDate = DateTime.Now,
                         Memo = "",
@@ -99,6 +107,7 @@ namespace TodoRazorApp.Seeds
                     new Todo
                     {
                         AccountId = 3,
+                        CategoryId = 3,
                         Name = "掃除",
                         DueDate = DateTime.Now.AddDays(6),
                         Memo = "",
