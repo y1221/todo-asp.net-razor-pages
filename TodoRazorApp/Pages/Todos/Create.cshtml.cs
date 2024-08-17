@@ -19,8 +19,12 @@ namespace TodoRazorApp.Pages.Todos
             _context = context;
         }
 
+        [ViewData]
+        public SelectList? CategoryList { get; set; }
+
         public IActionResult OnGet()
         {
+            CategoryList = new SelectList(_context.Category, "Id", "Name");
             return Page();
         }
 
@@ -42,6 +46,11 @@ namespace TodoRazorApp.Pages.Todos
             }
 
             Todo.AccountId = (int)accountId;
+
+            if (Todo.CategoryId == 0)
+            {
+                Todo.CategoryId = null;
+            }
 
             _context.Todo.Add(Todo);
             await _context.SaveChangesAsync();
