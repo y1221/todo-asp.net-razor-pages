@@ -28,7 +28,7 @@ namespace TodoRazorApp.Pages.Todos
                 return NotFound();
             }
 
-            var todo = await _context.Todo.Include(todo => todo.Account).FirstOrDefaultAsync(m => m.Id == id);
+            var todo = await _context.Todo.Include(todo => todo.Account).Include(todo => todo.Category).FirstOrDefaultAsync(m => m.Id == id);
             if (todo == null)
             {
                 return NotFound();

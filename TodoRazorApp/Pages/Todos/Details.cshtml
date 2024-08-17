@@ -18,6 +18,12 @@
                     @Html.DisplayFor(model => model.Todo.Name)
                 </dd>
                 <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Todo.Category.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Todo.Category.Name)
+                </dd>
+                <dt class="col-sm-2">
                     @Html.DisplayNameFor(model => model.Todo.DueDate)
                 </dt>
                 <dd class="col-sm-10">
