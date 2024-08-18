@@ -22,6 +22,8 @@ namespace TodoRazorApp.Pages.Todos
         public IList<Todo> Todo { get;set; } = default!;
         public IList<Todo> DoneTodo { get;set; } = default!;
 
+        public IList<Category> Category { get; set; } = default!;
+
         [BindProperty(SupportsGet = true)]
         public string? SearchString { get; set; }
 
@@ -41,6 +43,8 @@ namespace TodoRazorApp.Pages.Todos
 
             Todo = await todos.ToListAsync();
             DoneTodo = await doneTodos.ToListAsync();
+
+            Category = await _context.Category.ToListAsync();
         }
 
         public async Task<IActionResult> OnGetDone(int id)

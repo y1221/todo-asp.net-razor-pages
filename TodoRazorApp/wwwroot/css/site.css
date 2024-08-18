@@ -21,6 +21,29 @@ body {
   margin-bottom: 60px;
 }
 
+.category-list > button {
+    display: flex;
+    margin: 6px 0 6px 12px;
+    padding: 0 0 0 8px;
+    border: none;
+    background-color: transparent;
+    font-weight: normal;
+}
+
+@media (min-width: 600px) {
+    #index-content-area {
+        display: flex;
+    }
+
+    #index-category-area {
+        flex-grow: 1;
+    }
+
+    #index-todo-area {
+        flex-grow: 3;
+    }
+}
+
 .content-area {
     margin: 0 auto;
     max-width: 600px;
@@ -38,8 +61,8 @@ body {
 }
 
 .err-msg {
-  color: red;
-  font-weight: bold;
+    color: red;
+    font-weight: bold;
 }
 
 .custom-form {
