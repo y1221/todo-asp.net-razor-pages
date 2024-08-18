@@ -20,6 +20,9 @@ namespace TodoRazorApp.Pages.Todos
             _context = context;
         }
 
+        [ViewData]
+        public SelectList? CategoryList { get; set; }
+
         [BindProperty]
         public Todo Todo { get; set; } = default!;
 
@@ -36,6 +39,9 @@ namespace TodoRazorApp.Pages.Todos
                 return NotFound();
             }
             Todo = todo;
+
+            CategoryList = new SelectList(_context.Category, "Id", "Name");
+
             return Page();
         }
 
