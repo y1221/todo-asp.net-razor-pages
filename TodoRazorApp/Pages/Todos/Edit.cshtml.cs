@@ -62,6 +62,11 @@ namespace TodoRazorApp.Pages.Todos
 
             Todo.AccountId = (int)accountId;
 
+            if (Todo.CategoryId == 0)
+            {
+                Todo.CategoryId = null;
+            }
+
             _context.Attach(Todo).State = EntityState.Modified;
 
             try
