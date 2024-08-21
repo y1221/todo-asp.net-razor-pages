@@ -1,4 +1,11 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function changeCategoryFilter(id) {
+    // 一度全てのカテゴリから選択中レイアウトを削除
+    var categories = document.getElementById('category-list').children;
+    for (let i = 0; i < categories.length; i++) {
+        categories[i].classList.remove('selected')
+    }
 
-// Write your JavaScript code.
+    // 選択されたカテゴリに選択中レイアウトを付与
+    var target = document.getElementById(id);
+    target.classList.add('selected');
+}

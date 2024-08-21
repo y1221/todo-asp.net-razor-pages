@@ -14,11 +14,11 @@
 <div id="index-content-area">
     <div id="index-category-area">
         <h5>カテゴリ</h5>
-        <div class="category-list">
-            <button>すべて</button>
+        <div id="category-list">
+            <button id="category-list-item-0" onclick="changeCategoryFilter(this.id)">すべて</button>
             @foreach (var item in Model.Category)
             {
-                <button>@Html.DisplayFor(modelItem => item.Name)</button>
+                <button id="category-list-item-@item.Id" onclick="changeCategoryFilter(this.id)">@item.Name</button>
             }
         </div>
     </div>
