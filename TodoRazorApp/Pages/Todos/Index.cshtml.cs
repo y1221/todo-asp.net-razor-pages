@@ -36,7 +36,14 @@ namespace TodoRazorApp.Pages.Todos
 
             var todos = _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == false && todo.IsDelete == false);
             var doneTodos = _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == true && todo.IsDelete == false);
-            
+
+            if (SelectedCategory != 0)
+            {
+                // カテゴリで絞り込む
+                todos = todos.Where(todo => todo.CategoryId == SelectedCategory);
+                doneTodos = doneTodos.Where(todo => todo.CategoryId == SelectedCategory);
+            }
+
             if (!string.IsNullOrEmpty(SearchString))
             {
                 // 検索文字列で絞り込む
