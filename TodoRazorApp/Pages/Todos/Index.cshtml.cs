@@ -26,10 +26,13 @@ namespace TodoRazorApp.Pages.Todos
 
         [BindProperty(SupportsGet = true)]
         public string? SearchString { get; set; }
+        public int SelectedCategory { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
             var accountId = HttpContext.Session.GetInt32("accountId");
+            SelectedCategory = HttpContext.Session.GetInt32("categoryId") ?? 0;
+            HttpContext.Session.Remove("categoryId");
 
             var todos = _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == false && todo.IsDelete == false);
             var doneTodos = _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == true && todo.IsDelete == false);
@@ -45,6 +48,13 @@ namespace TodoRazorApp.Pages.Todos
             DoneTodo = await doneTodos.ToListAsync();
 
             Category = await _context.Category.ToListAsync();
+        }
+
+        public IActionResult OnGetChangeCategoryFilter(int id)
+        {
+            HttpContext.Session.SetInt32("categoryId", id);
+
+            return RedirectToPage("./Index");
         }
 
         public async Task<IActionResult> OnGetDone(int id)

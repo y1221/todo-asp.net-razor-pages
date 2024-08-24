@@ -5,6 +5,13 @@
     ViewData["Title"] = "Index";
 }
 
+@functions {
+    private string GetSelectedCategoryStyle(int id)
+    {
+        return Model.SelectedCategory == id ? "selected" : string.Empty;
+    }
+}
+
 <h1>タスク一覧</h1>
 
 <a asp-page="Create">
@@ -15,10 +22,10 @@
     <div id="index-category-area">
         <h5>カテゴリ</h5>
         <div id="category-list">
-            <button id="category-list-item-0" onclick="changeCategoryFilter(this.id)">すべて</button>
+            <a class="@GetSelectedCategoryStyle(0)" asp-page-handler="ChangeCategoryFilter" asp-route-id="0">すべて</a>
             @foreach (var item in Model.Category)
             {
-                <button id="category-list-item-@item.Id" onclick="changeCategoryFilter(this.id)">@item.Name</button>
+                <a class="@GetSelectedCategoryStyle(item.Id)" asp-page-handler="ChangeCategoryFilter" asp-route-id="@item.Id">@item.Name</a>
             }
         </div>
     </div>
