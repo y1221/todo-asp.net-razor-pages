@@ -5,78 +5,102 @@
     ViewData["Title"] = "Index";
 }
 
+@functions {
+    private string GetSelectedCategoryStyle(int id)
+    {
+        return Model.SelectedCategory == id ? "selected" : string.Empty;
+    }
+}
+
+<h1>タスク一覧</h1>
+
 <a asp-page="Create">
     <p class="btn btn-primary">新規タスク</p>
 </a>
 
-<form method="get">
-    <p>
-        <input type="text" asp-for="SearchString" /><input type="submit" value="検索" />
-    </p>
-</form>
+<div id="index-content-area">
+    <div id="index-category-area">
+        <h5>カテゴリ</h5>
+        <div id="category-list">
+            <a class="@GetSelectedCategoryStyle(0)" asp-page-handler="ChangeCategoryFilter" asp-route-id="0">すべて</a>
+            @foreach (var item in Model.Category)
+            {
+                <a class="@GetSelectedCategoryStyle(item.Id)" asp-page-handler="ChangeCategoryFilter" asp-route-id="@item.Id">@item.Name</a>
+            }
+        </div>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Todo[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Todo[0].DueDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Todo)
-        {
-            <tr>
-                <td>
-                    <a asp-page="./Details" asp-route-id="@item.Id">
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DueDate)
-                </td>
-                <td>
-                    <a asp-page-handler="Done" asp-route-id="@item.Id">完了</a> |
-                    <a asp-page-handler="Delete" asp-route-id="@item.Id">削除</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div id="index-todo-area">
+        <form method="get">
+            <p>
+                <input type="text" asp-for="SearchString" /><input type="submit" value="検索" />
+            </p>
+        </form>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                完了済みタスク
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DoneTodo[0].DueDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.DoneTodo)
-        {
-            <tr>
-                <td>
-                    <a asp-page="./Details" asp-route-id="@item.Id">
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DueDate)
-                </td>
-                <td>
-                    <a asp-page-handler="Return" asp-route-id="@item.Id">戻す</a> |
-                    <a asp-page-handler="Delete" asp-route-id="@item.Id">削除</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Todo[0].Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Todo[0].DueDate)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Todo)
+                {
+                    <tr>
+                        <td>
+                            <a asp-page="./Details" asp-route-id="@item.Id">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DueDate)
+                        </td>
+                        <td>
+                            <a asp-page-handler="Done" asp-route-id="@item.Id">完了</a> |
+                            <a asp-page-handler="Delete" asp-route-id="@item.Id">削除</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        完了済みタスク
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DoneTodo[0].DueDate)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DoneTodo)
+                {
+                    <tr>
+                        <td>
+                            <a asp-page="./Details" asp-route-id="@item.Id">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DueDate)
+                        </td>
+                        <td>
+                            <a asp-page-handler="Return" asp-route-id="@item.Id">戻す</a> |
+                            <a asp-page-handler="Delete" asp-route-id="@item.Id">削除</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

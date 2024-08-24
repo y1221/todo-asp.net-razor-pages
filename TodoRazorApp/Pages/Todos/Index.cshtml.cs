@@ -22,16 +22,28 @@ namespace TodoRazorApp.Pages.Todos
         public IList<Todo> Todo { get;set; } = default!;
         public IList<Todo> DoneTodo { get;set; } = default!;
 
+        public IList<Category> Category { get; set; } = default!;
+
         [BindProperty(SupportsGet = true)]
         public string? SearchString { get; set; }
+        public int SelectedCategory { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
             var accountId = HttpContext.Session.GetInt32("accountId");
+            SelectedCategory = HttpContext.Session.GetInt32("categoryId") ?? 0;
+            HttpContext.Session.Remove("categoryId");
 
             var todos = _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == false && todo.IsDelete == false);
             var doneTodos = _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == true && todo.IsDelete == false);
-            
+
+            if (SelectedCategory != 0)
+            {
+                // カテゴリで絞り込む
+                todos = todos.Where(todo => todo.CategoryId == SelectedCategory);
+                doneTodos = doneTodos.Where(todo => todo.CategoryId == SelectedCategory);
+            }
+
             if (!string.IsNullOrEmpty(SearchString))
             {
                 // 検索文字列で絞り込む
@@ -41,6 +53,15 @@ namespace TodoRazorApp.Pages.Todos
 
             Todo = await todos.ToListAsync();
             DoneTodo = await doneTodos.ToListAsync();
+
+            Category = await _context.Category.ToListAsync();
+        }
+
+        public IActionResult OnGetChangeCategoryFilter(int id)
+        {
+            HttpContext.Session.SetInt32("categoryId", id);
+
+            return RedirectToPage("./Index");
         }
 
         public async Task<IActionResult> OnGetDone(int id)
