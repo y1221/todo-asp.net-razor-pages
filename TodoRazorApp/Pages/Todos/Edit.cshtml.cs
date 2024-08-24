@@ -33,7 +33,7 @@ namespace TodoRazorApp.Pages.Todos
                 return NotFound();
             }
 
-            var todo =  await _context.Todo.FirstOrDefaultAsync(m => m.Id == id);
+            var todo =  await _context.Todo.Include(todo => todo.Account).FirstOrDefaultAsync(m => m.Id == id);
             if (todo == null)
             {
                 return NotFound();
@@ -53,14 +53,6 @@ namespace TodoRazorApp.Pages.Todos
             {
                 return Page();
             }
-
-            var accountId = HttpContext.Session.GetInt32("accountId");
-            if (accountId == null)
-            {
-                return Page();
-            }
-
-            Todo.AccountId = (int)accountId;
 
             if (Todo.CategoryId == 0)
             {

@@ -12,6 +12,7 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Todo.Id" />
+            <input type="hidden" asp-for="Todo.AccountId" />
             <div class="form-group custom-form">
                 <label asp-for="Todo.Name" class="control-label"></label>
                 <input asp-for="Todo.Name" class="form-control" />
