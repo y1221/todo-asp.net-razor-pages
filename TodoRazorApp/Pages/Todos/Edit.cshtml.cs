@@ -33,7 +33,9 @@ namespace TodoRazorApp.Pages.Todos
                 return NotFound();
             }
 
-            var todo =  await _context.Todo.Include(todo => todo.Account).FirstOrDefaultAsync(m => m.Id == id);
+            var accountId = HttpContext.Session.GetInt32("accountId");
+
+            var todo =  await _context.Todo.Include(todo => todo.Account).FirstOrDefaultAsync(todo => todo.AccountId == accountId && todo.Id == id);
             if (todo == null)
             {
                 return NotFound();
