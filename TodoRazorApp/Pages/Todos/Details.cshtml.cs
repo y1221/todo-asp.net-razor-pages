@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TodoRazorApp.Data;
 using TodoRazorApp.Models;
+using TodoRazorApp.Pages.Shared;
 
 namespace TodoRazorApp.Pages.Todos
 {
@@ -28,7 +29,7 @@ namespace TodoRazorApp.Pages.Todos
                 return NotFound();
             }
 
-            var accountId = HttpContext.Session.GetInt32("accountId");
+            var accountId = LoginAccount._loginAccount.Id;
 
             var todo = await _context.Todo.Include(todo => todo.Category).FirstOrDefaultAsync(todo => todo.AccountId == accountId && todo.Id == id);
             if (todo == null)

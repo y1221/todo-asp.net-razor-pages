@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TodoRazorApp.Data;
 using TodoRazorApp.Models;
+using TodoRazorApp.Pages.Shared;
 
 namespace TodoRazorApp.Pages.Todos
 {
@@ -30,7 +31,7 @@ namespace TodoRazorApp.Pages.Todos
 
         public async Task OnGetAsync()
         {
-            var accountId = HttpContext.Session.GetInt32("accountId");
+            var accountId = LoginAccount._loginAccount.Id;
             SelectedCategory = HttpContext.Session.GetInt32("categoryId") ?? 0;
             HttpContext.Session.Remove("categoryId");
 

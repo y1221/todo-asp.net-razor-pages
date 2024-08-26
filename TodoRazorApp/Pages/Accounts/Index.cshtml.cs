@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TodoRazorApp.Data;
 using TodoRazorApp.Models;
+using TodoRazorApp.Pages.Shared;
 
 namespace TodoRazorApp.Pages.Accounts
 {
@@ -61,7 +62,7 @@ namespace TodoRazorApp.Pages.Accounts
             }
 
             // セッションにAccount.Idを保存
-            HttpContext.Session.SetInt32("accountId", account.Id);
+            LoginAccount.Login(account);
 
             return RedirectToPage("../Todos/Index");
         }
