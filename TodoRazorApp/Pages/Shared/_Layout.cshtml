@@ -27,6 +27,12 @@
                         </li>
                     </ul>
                 </div>
+                @if (LoginAccount._isLogin)
+                {
+                    <div>
+                        <a>@LoginAccount._loginAccount.Name</a><span>さん</span>
+                    </div>
+                }
             </div>
         </nav>
     </header>
