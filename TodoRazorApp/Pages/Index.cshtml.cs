@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TodoRazorApp.Pages.Shared;
 
 namespace TodoRazorApp.Pages
 {
@@ -14,6 +15,12 @@ namespace TodoRazorApp.Pages
 
         public IActionResult OnGet()
         {
+            return RedirectToPage("./Accounts/Index");
+        }
+
+        public IActionResult OnGetLogout()
+        {
+            LoginAccount.Logout();
             return RedirectToPage("./Accounts/Index");
         }
     }
