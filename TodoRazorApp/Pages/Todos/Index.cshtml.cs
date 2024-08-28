@@ -26,14 +26,14 @@ namespace TodoRazorApp.Pages.Todos
         public IList<Category> Category { get; set; } = default!;
 
         [BindProperty(SupportsGet = true)]
-        public string? SearchString { get; set; }
         public int SelectedCategory { get; set; } = default!;
+
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
 
         public async Task OnGetAsync()
         {
             var accountId = LoginAccount._loginAccount.Id;
-            SelectedCategory = HttpContext.Session.GetInt32("categoryId") ?? 0;
-            HttpContext.Session.Remove("categoryId");
 
             var todos = _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == false && todo.IsDelete == false);
             var doneTodos = _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == true && todo.IsDelete == false);
@@ -60,17 +60,15 @@ namespace TodoRazorApp.Pages.Todos
 
         public IActionResult OnGetChangeCategoryFilter(int id)
         {
-            HttpContext.Session.SetInt32("categoryId", id);
-
-            return RedirectToPage("./Index");
+            return RedirectToPage(new { SelectedCategory = id });
         }
 
-        public async Task<IActionResult> OnGetDone(int id)
+        public async Task<IActionResult> OnPostDone(int id)
         {
             return await ChangeIsDone(id, true);
         }
 
-        public async Task<IActionResult> OnGetReturn(int id)
+        public async Task<IActionResult> OnPostReturn(int id)
         {
             return await ChangeIsDone(id, false);
         }
@@ -103,10 +101,10 @@ namespace TodoRazorApp.Pages.Todos
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage(new { SelectedCategory, SearchString });
         }
 
-        public async Task<IActionResult> OnGetDelete(int id)
+        public async Task<IActionResult> OnPostDelete(int id)
         {
             var todo = await _context.Todo.FirstOrDefaultAsync(m => m.Id == id);
             if (todo == null)
@@ -134,7 +132,7 @@ namespace TodoRazorApp.Pages.Todos
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage(new { SelectedCategory, SearchString });
         }
 
         private bool TodoExists(int id)
