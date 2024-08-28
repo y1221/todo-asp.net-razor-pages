@@ -26,14 +26,14 @@ namespace TodoRazorApp.Pages.Todos
         public IList<Category> Category { get; set; } = default!;
 
         [BindProperty(SupportsGet = true)]
-        public string? SearchString { get; set; }
         public int SelectedCategory { get; set; } = default!;
+
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
 
         public async Task OnGetAsync()
         {
             var accountId = LoginAccount._loginAccount.Id;
-            SelectedCategory = HttpContext.Session.GetInt32("categoryId") ?? 0;
-            HttpContext.Session.Remove("categoryId");
 
             var todos = _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == false && todo.IsDelete == false);
             var doneTodos = _context.Todo.Where(todo => todo.AccountId == accountId && todo.IsDone == true && todo.IsDelete == false);
@@ -60,9 +60,7 @@ namespace TodoRazorApp.Pages.Todos
 
         public IActionResult OnGetChangeCategoryFilter(int id)
         {
-            HttpContext.Session.SetInt32("categoryId", id);
-
-            return RedirectToPage("./Index");
+            return RedirectToPage(new { SelectedCategory = id });
         }
 
         public async Task<IActionResult> OnGetDone(int id)

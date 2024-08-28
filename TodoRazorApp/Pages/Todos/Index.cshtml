@@ -35,6 +35,9 @@
             <p>
                 <input type="text" asp-for="SearchString" /><input type="submit" value="検索" />
             </p>
+
+            @* カテゴリ選択中はその中から検索する *@
+            <input type="hidden" asp-for="SelectedCategory" />
         </form>
 
         <table class="table">
