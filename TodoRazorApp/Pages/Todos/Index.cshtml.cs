@@ -63,17 +63,17 @@ namespace TodoRazorApp.Pages.Todos
             return RedirectToPage(new { SelectedCategory = id });
         }
 
-        public async Task<IActionResult> OnPostDone(int id)
+        public async Task<IActionResult> OnPostDoneAsync(int id)
         {
-            return await ChangeIsDone(id, true);
+            return await ChangeIsDoneAsync(id, true);
         }
 
-        public async Task<IActionResult> OnPostReturn(int id)
+        public async Task<IActionResult> OnPostReturnAsync(int id)
         {
-            return await ChangeIsDone(id, false);
+            return await ChangeIsDoneAsync(id, false);
         }
 
-        private async Task<IActionResult> ChangeIsDone(int id, bool isDone)
+        private async Task<IActionResult> ChangeIsDoneAsync(int id, bool isDone)
         {
             var todo = await _context.Todo.FirstOrDefaultAsync(m => m.Id == id);
             if (todo == null)
@@ -104,7 +104,7 @@ namespace TodoRazorApp.Pages.Todos
             return RedirectToPage(new { SelectedCategory, SearchString });
         }
 
-        public async Task<IActionResult> OnPostDelete(int id)
+        public async Task<IActionResult> OnPostDeleteAsync(int id)
         {
             var todo = await _context.Todo.FirstOrDefaultAsync(m => m.Id == id);
             if (todo == null)
