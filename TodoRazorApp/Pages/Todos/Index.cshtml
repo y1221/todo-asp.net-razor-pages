@@ -36,7 +36,7 @@
                 <input type="text" asp-for="SearchString" /><input type="submit" value="検索" />
             </p>
 
-            @* カテゴリ選択中はその中から検索する *@
+            @* カテゴリの絞り込みを保持 *@
             <input type="hidden" asp-for="SelectedCategory" />
         </form>
 
@@ -65,8 +65,14 @@
                             @Html.DisplayFor(modelItem => item.DueDate)
                         </td>
                         <td>
-                            <a asp-page-handler="Done" asp-route-id="@item.Id">完了</a> |
-                            <a asp-page-handler="Delete" asp-route-id="@item.Id">削除</a>
+                            <form method="post">
+                                <input type="submit" asp-page-handler="Done" asp-route-id="@item.Id" value="完了" />
+                                <input type="submit" asp-page-handler="Delete" asp-route-id="@item.Id" value="削除" />
+
+                                @* カテゴリ、検索文字列の絞り込みを保持 *@
+                                <input type="hidden" asp-for="SelectedCategory" />
+                                <input type="hidden" asp-for="SearchString" />
+                            </form>
                         </td>
                     </tr>
                 }
@@ -98,8 +104,14 @@
                             @Html.DisplayFor(modelItem => item.DueDate)
                         </td>
                         <td>
-                            <a asp-page-handler="Return" asp-route-id="@item.Id">戻す</a> |
-                            <a asp-page-handler="Delete" asp-route-id="@item.Id">削除</a>
+                            <form method="post">
+                                <input type="submit" asp-page-handler="Return" asp-route-id="@item.Id" value="戻す" />
+                                <input type="submit" asp-page-handler="Delete" asp-route-id="@item.Id" value="削除" />
+
+                                @* カテゴリ、検索文字列の絞り込みを保持 *@
+                                <input type="hidden" asp-for="SelectedCategory" />
+                                <input type="hidden" asp-for="SearchString" />
+                            </form>
                         </td>
                     </tr>
                 }

@@ -63,12 +63,12 @@ namespace TodoRazorApp.Pages.Todos
             return RedirectToPage(new { SelectedCategory = id });
         }
 
-        public async Task<IActionResult> OnGetDone(int id)
+        public async Task<IActionResult> OnPostDone(int id)
         {
             return await ChangeIsDone(id, true);
         }
 
-        public async Task<IActionResult> OnGetReturn(int id)
+        public async Task<IActionResult> OnPostReturn(int id)
         {
             return await ChangeIsDone(id, false);
         }
@@ -101,10 +101,10 @@ namespace TodoRazorApp.Pages.Todos
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage(new { SelectedCategory, SearchString });
         }
 
-        public async Task<IActionResult> OnGetDelete(int id)
+        public async Task<IActionResult> OnPostDelete(int id)
         {
             var todo = await _context.Todo.FirstOrDefaultAsync(m => m.Id == id);
             if (todo == null)
@@ -132,7 +132,7 @@ namespace TodoRazorApp.Pages.Todos
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage(new { SelectedCategory, SearchString });
         }
 
         private bool TodoExists(int id)
