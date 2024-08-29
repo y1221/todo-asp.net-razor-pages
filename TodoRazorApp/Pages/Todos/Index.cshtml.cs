@@ -57,24 +57,24 @@ namespace TodoRazorApp.Pages.Todos
             Category = await _context.Category.ToListAsync();
         }
 
-        public IActionResult OnGetChangeCategoryFilter(int id)
+        public IActionResult OnGetChangeCategoryFilter(int categoryId)
         {
-            return RedirectToPage(new { SelectedCategory = id });
+            return RedirectToPage(new { SelectedCategory = categoryId });
         }
 
-        public async Task<IActionResult> OnPostDoneAsync(int id)
+        public async Task<IActionResult> OnPostDoneAsync(int todoId)
         {
-            return await ChangeIsDoneAsync(id, true);
+            return await ChangeIsDoneAsync(todoId, true);
         }
 
-        public async Task<IActionResult> OnPostReturnAsync(int id)
+        public async Task<IActionResult> OnPostReturnAsync(int todoId)
         {
-            return await ChangeIsDoneAsync(id, false);
+            return await ChangeIsDoneAsync(todoId, false);
         }
 
-        private async Task<IActionResult> ChangeIsDoneAsync(int id, bool isDone)
+        private async Task<IActionResult> ChangeIsDoneAsync(int todoId, bool isDone)
         {
-            var todo = await _context.Todo.FirstOrDefaultAsync(m => m.Id == id);
+            var todo = await _context.Todo.FirstOrDefaultAsync(m => m.Id == todoId);
             if (todo == null)
             {
                 return NotFound();
@@ -103,9 +103,9 @@ namespace TodoRazorApp.Pages.Todos
             return RedirectToPage(new { SelectedCategory, SearchString });
         }
 
-        public async Task<IActionResult> OnPostDeleteAsync(int id)
+        public async Task<IActionResult> OnPostDeleteAsync(int todoId)
         {
-            var todo = await _context.Todo.FirstOrDefaultAsync(m => m.Id == id);
+            var todo = await _context.Todo.FirstOrDefaultAsync(m => m.Id == todoId);
             if (todo == null)
             {
                 return NotFound();
@@ -134,9 +134,9 @@ namespace TodoRazorApp.Pages.Todos
             return RedirectToPage(new { SelectedCategory, SearchString });
         }
 
-        private bool TodoExists(int id)
+        private bool TodoExists(int todoId)
         {
-            return _context.Todo.Any(e => e.Id == id);
+            return _context.Todo.Any(e => e.Id == todoId);
         }
     }
 }

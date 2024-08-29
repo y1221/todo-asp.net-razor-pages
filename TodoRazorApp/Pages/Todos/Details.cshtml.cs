@@ -22,16 +22,16 @@ namespace TodoRazorApp.Pages.Todos
             _context = context;
         }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? todoId)
         {
-            if (id == null)
+            if (todoId == null)
             {
                 return NotFound();
             }
 
             var accountId = LoginAccount._loginAccount.Id;
 
-            var todo = await _context.Todo.Include(todo => todo.Category).FirstOrDefaultAsync(todo => todo.AccountId == accountId && todo.Id == id);
+            var todo = await _context.Todo.Include(todo => todo.Category).FirstOrDefaultAsync(todo => todo.AccountId == accountId && todo.Id == todoId);
             if (todo == null)
             {
                 return NotFound();

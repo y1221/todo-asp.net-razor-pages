@@ -27,16 +27,16 @@ namespace TodoRazorApp.Pages.Todos
             _context = context;
         }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? todoId)
         {
-            if (id == null)
+            if (todoId == null)
             {
                 return NotFound();
             }
 
             var accountId = LoginAccount._loginAccount.Id;
 
-            var todo =  await _context.Todo.Include(todo => todo.Account).FirstOrDefaultAsync(todo => todo.AccountId == accountId && todo.Id == id);
+            var todo =  await _context.Todo.Include(todo => todo.Account).FirstOrDefaultAsync(todo => todo.AccountId == accountId && todo.Id == todoId);
             if (todo == null)
             {
                 return NotFound();
@@ -81,9 +81,9 @@ namespace TodoRazorApp.Pages.Todos
             return RedirectToPage("./Index");
         }
 
-        private bool TodoExists(int id)
+        private bool TodoExists(int todoId)
         {
-            return _context.Todo.Any(e => e.Id == id);
+            return _context.Todo.Any(e => e.Id == todoId);
         }
     }
 }
