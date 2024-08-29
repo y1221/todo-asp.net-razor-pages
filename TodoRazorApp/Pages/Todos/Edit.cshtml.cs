@@ -16,16 +16,16 @@ namespace TodoRazorApp.Pages.Todos
     {
         private readonly TodoRazorApp.Data.TodoRazorAppContext _context;
 
-        public EditModel(TodoRazorApp.Data.TodoRazorAppContext context)
-        {
-            _context = context;
-        }
+        [BindProperty]
+        public Todo Todo { get; set; } = default!;
 
         [ViewData]
         public SelectList? CategoryList { get; set; }
 
-        [BindProperty]
-        public Todo Todo { get; set; } = default!;
+        public EditModel(TodoRazorApp.Data.TodoRazorAppContext context)
+        {
+            _context = context;
+        }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -48,8 +48,6 @@ namespace TodoRazorApp.Pages.Todos
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

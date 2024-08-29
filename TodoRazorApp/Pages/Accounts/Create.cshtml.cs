@@ -15,22 +15,21 @@ namespace TodoRazorApp.Pages.Accounts
     {
         private readonly TodoRazorApp.Data.TodoRazorAppContext _context;
 
+        public string ErrorMsg { get; set; } = string.Empty;
+
+        [BindProperty]
+        public Account Account { get; set; } = default!;
+
         public CreateModel(TodoRazorApp.Data.TodoRazorAppContext context)
         {
             _context = context;
         }
-
-        public string ErrorMsg { get; set; } = string.Empty;
 
         public IActionResult OnGet()
         {
             return Page();
         }
 
-        [BindProperty]
-        public Account Account { get; set; } = default!;
-
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

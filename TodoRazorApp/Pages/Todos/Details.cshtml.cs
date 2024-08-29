@@ -15,12 +15,12 @@ namespace TodoRazorApp.Pages.Todos
     {
         private readonly TodoRazorApp.Data.TodoRazorAppContext _context;
 
+        public Todo Todo { get; set; } = default!;
+
         public DetailsModel(TodoRazorApp.Data.TodoRazorAppContext context)
         {
             _context = context;
         }
-
-        public Todo Todo { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

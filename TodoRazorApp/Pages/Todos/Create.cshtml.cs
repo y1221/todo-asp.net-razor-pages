@@ -15,13 +15,16 @@ namespace TodoRazorApp.Pages.Todos
     {
         private readonly TodoRazorApp.Data.TodoRazorAppContext _context;
 
+        [BindProperty]
+        public Todo Todo { get; set; } = default!;
+
+        [ViewData]
+        public SelectList? CategoryList { get; set; }
+
         public CreateModel(TodoRazorApp.Data.TodoRazorAppContext context)
         {
             _context = context;
         }
-
-        [ViewData]
-        public SelectList? CategoryList { get; set; }
 
         public IActionResult OnGet()
         {
@@ -29,10 +32,6 @@ namespace TodoRazorApp.Pages.Todos
             return Page();
         }
 
-        [BindProperty]
-        public Todo Todo { get; set; } = default!;
-
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

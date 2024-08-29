@@ -16,18 +16,8 @@ namespace TodoRazorApp.Pages.Accounts
     {
         private readonly TodoRazorApp.Data.TodoRazorAppContext _context;
 
-        public IndexModel(TodoRazorApp.Data.TodoRazorAppContext context)
-        {
-            _context = context;
-        }
-
         [ViewData]
         public string ErrorMsg { get; set; } = string.Empty;
-
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
 
         [BindProperty]
         [Display(Name = "メールアドレス")]
@@ -38,6 +28,16 @@ namespace TodoRazorApp.Pages.Accounts
         [Display(Name = "パスワード")]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
+
+        public IndexModel(TodoRazorApp.Data.TodoRazorAppContext context)
+        {
+            _context = context;
+        }
+
+        public IActionResult OnGet()
+        {
+            return Page();
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -61,7 +61,6 @@ namespace TodoRazorApp.Pages.Accounts
                 return Page();
             }
 
-            // セッションにAccount.Idを保存
             LoginAccount.Login(account);
 
             return RedirectToPage("../Todos/Index");

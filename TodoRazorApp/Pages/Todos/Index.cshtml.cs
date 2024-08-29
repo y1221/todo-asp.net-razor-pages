@@ -15,14 +15,8 @@ namespace TodoRazorApp.Pages.Todos
     {
         private readonly TodoRazorApp.Data.TodoRazorAppContext _context;
 
-        public IndexModel(TodoRazorApp.Data.TodoRazorAppContext context)
-        {
-            _context = context;
-        }
-
-        public IList<Todo> Todo { get;set; } = default!;
-        public IList<Todo> DoneTodo { get;set; } = default!;
-
+        public IList<Todo> Todo { get; set; } = default!;
+        public IList<Todo> DoneTodo { get; set; } = default!;
         public IList<Category> Category { get; set; } = default!;
 
         [BindProperty(SupportsGet = true)]
@@ -30,6 +24,11 @@ namespace TodoRazorApp.Pages.Todos
 
         [BindProperty(SupportsGet = true)]
         public string? SearchString { get; set; }
+
+        public IndexModel(TodoRazorApp.Data.TodoRazorAppContext context)
+        {
+            _context = context;
+        }
 
         public async Task OnGetAsync()
         {
