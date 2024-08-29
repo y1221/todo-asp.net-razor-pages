@@ -57,9 +57,7 @@
                 {
                     <tr>
                         <td>
-                            <a asp-page="./Details" asp-route-todoId="@item.Id">
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </a>
+                            <a asp-page="./Details" asp-route-todoId="@item.Id">@item.Name</a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.DueDate)
@@ -96,9 +94,7 @@
                 {
                     <tr>
                         <td>
-                            <a asp-page="./Details" asp-route-todoId="@item.Id">
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </a>
+                            <a asp-page="./Details" asp-route-todoId="@item.Id">@item.Name</a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.DueDate)
