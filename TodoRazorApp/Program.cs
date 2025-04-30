@@ -18,9 +18,18 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
-    AccountSeed.Initialize(services);
-    CategorySeed.Initialize(services);
-    TodoSeed.Initialize(services);
+    using (var context = new TodoRazorAppContext(services.GetRequiredService<DbContextOptions<TodoRazorAppContext>>()))
+    {
+        if (context == null) throw new ArgumentNullException("Null TodoRazorAppContext");
+
+        // データベースの作成
+        context.Database.Migrate();
+
+        // 初期データ追加
+        AccountSeed.Initialize(context);
+        CategorySeed.Initialize(context);
+        TodoSeed.Initialize(context);
+    }
 }
 
 // Configure the HTTP request pipeline.

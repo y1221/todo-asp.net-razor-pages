@@ -6,32 +6,29 @@ namespace TodoRazorApp.Seeds
 {
     public static class CategorySeed
     {
-        public static void Initialize(IServiceProvider serviceProvider)
+        public static void Initialize(TodoRazorAppContext context)
         {
-            using (var context = new TodoRazorAppContext(serviceProvider.GetRequiredService<DbContextOptions<TodoRazorAppContext>>()))
-            {
-                if (context == null || context.Category == null) throw new ArgumentNullException("Null TodoRazorAppContext");
+            if (context.Category == null) throw new ArgumentNullException("Null TodoRazorAppContext Category");
 
-                // シード済みであれば、後続処理を行わない
-                if (context.Category.Any()) return;
+            // シード済みであれば、後続処理を行わない
+            if (context.Category.Any()) return;
 
-                context.Category.AddRange(
-                    new Category
-                    {
-                        Name = "学校"
-                    },
+            context.Category.AddRange(
+                new Category
+                {
+                    Name = "学校"
+                },
 
-                    new Category
-                    {
-                        Name = "スポーツ"
-                    },
+                new Category
+                {
+                    Name = "スポーツ"
+                },
 
-                    new Category
-                    {
-                        Name = "家事"
-                    });
-                context.SaveChanges();
-            }
+                new Category
+                {
+                    Name = "家事"
+                });
+            context.SaveChanges();
         }
     }
 }
